@@ -11,9 +11,10 @@ const morgan = require('morgan');
 
 const app = express();
 
+
 async function main() {
     mongoose.set('strictQuery', false);
-    await mongoose.connect('mongodb://0.0.0.0:27017/DBNAME');
+    await mongoose.connect('mongodb://0.0.0.0:27017/calculator_express');
     
     app.set('view engine', 'ejs');
     app.set('views', path.join(__dirname, 'views'));
@@ -32,12 +33,16 @@ async function main() {
                 saveUninitialized: false,
                 store: MongoStore.create(
                     {
-                        mongoUrl: 'mongodb://0.0.0.0:27017/DBNAME_SESSION'
+                        mongoUrl: 'mongodb://0.0.0.0:27017/calculator_express'
                     }
                 )
             }
         )
     );
+
+    app.get('/', (req, res) => {
+        res.render('index');
+    });
 
     app.listen(8000, () => console.log('Started Server On Port 8000'));
 }
