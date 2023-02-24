@@ -1,6 +1,6 @@
 <%- include('includes/hstart', {title}) %>
-  <link rel="stylesheet" href="css/normalize.min.css">
-  <link rel="stylesheet" href="css/style.css">
+  <%- include('includes/hcss', { cssfiles: ["css/normalize.min.css",
+  "css/style.css"] }) %>
 <%- include('includes/hmid') %>
 <%- include('includes/hbackground') %>
 <%#
