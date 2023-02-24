@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Calculator - Express</title>
+<%- include('includes/hstart', {title}) %>
   <link rel="stylesheet" href="css/normalize.min.css">
   <link rel="stylesheet" href="css/style.css">
 
@@ -75,7 +71,7 @@
   <path d="M182 234C282.516 234 364 152.516 364 52C364 -48.5158 282.516 -130 182 -130C81.4842 -130 0 -48.5158 0 52C0 152.516 81.4842 234 182 234Z" fill="#7A8DF4"/>
   </svg>
 </div>
-
+<%#
 <main class="calculator-wrapper">
 <!--   <div class="title-wrapper">
     <div class="title">Glassmorphism</div>
@@ -196,8 +192,7 @@
   
   <div class="calculator-back"></div>
 </main>
+%>
 <!-- partial -->
   <script  src="js/script.js"></script>
-
-</body>
-</html>
+<%- include('includes/hend') %>
