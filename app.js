@@ -41,7 +41,11 @@ async function main() {
     );
 
     app.get('/', (req, res) => {
-        res.render('index', {title: 'Calculator - Express'});
+        res.render('index', {title: 'Calculator'});
+    });
+
+    app.get('/login', (req, res) => {
+        res.render('login', {title: 'Login'});
     });
 
     app.listen(8000, () => console.log('Started Server On Port 8000'));
