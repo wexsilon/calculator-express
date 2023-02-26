@@ -10,6 +10,9 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const serveFavicon = require('serve-favicon');
 
+const indexRoutes = require('./routes/index');
+const loginRoutes = require('./routes/login');
+
 const app = express();
 
 
@@ -42,13 +45,8 @@ async function main() {
         )
     );
 
-    app.get('/', (req, res) => {
-        res.render('index', {title: 'Calculator'});
-    });
-
-    app.get('/login', (req, res) => {
-        res.render('login', {title: 'Login'});
-    });
+    app.use('/', indexRoutes);
+    app.use('/login', loginRoutes);
 
     app.listen(8000, () => console.log('Started Server On Port 8000'));
 }
