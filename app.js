@@ -8,6 +8,7 @@ const serveStatic = require('serve-static');
 const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const serveFavicon = require('serve-favicon');
 
 const app = express();
 
@@ -21,6 +22,7 @@ async function main() {
     
     app.use(morgan('dev'));
     app.use(serveStatic(path.join(__dirname, 'public')));
+    app.use(serveFavicon(path.join(__dirname, 'public', 'img', 'calc.ico')));
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
     app.use(cookieParser());
