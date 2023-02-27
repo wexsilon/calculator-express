@@ -5,8 +5,13 @@ const signupController = require('../controllers/signupController');
 
 const router = express.Router();
 
-router.get('/', loginController.getMethod);
+router.route('/')
+    .get(loginController.getMethod)
+    .post(loginController.postMethod);
 
-router.get('/signup', signupController.getMethod);
+router.route('/signup')
+    .get(signupController.getMethod)
+    .post(signupController.postMethod);
+
 
 module.exports = router;
