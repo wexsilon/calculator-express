@@ -9,3 +9,7 @@ const UserSchema = mongoose.Schema(
         calcres:  { type: String, default: '&nbsp;' }
     }
 );
+
+const UserModel = mongoose.model('User', UserSchema, 'user');
+
+module.exports = UserModel;
