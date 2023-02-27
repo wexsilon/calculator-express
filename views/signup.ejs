@@ -20,7 +20,7 @@
                 </svg>
               </button>
             <div class="form">
-                <h2 style="text-align: center;">LOGIN</h2>
+                <h2 style="text-align: center;">SIGN-UP</h2>
                 <form action="">
                     <div class="inputBx">
                         <input type="text" required="required">
@@ -33,11 +33,17 @@
                         <a href="#" class="password-control" onclick="return show_hide_password(this);"></a>
                         <i class="fas fa-key"></i>
                     </div>
+                    <div class="inputBx password">
+                        <input id="password-input" type="password" name="password" required="required">
+                        <span>Confirm Password</span>
+                        <a href="#" class="password-control" onclick="return show_hide_password(this);"></a>
+                        <i class="fas fa-key"></i>
+                    </div>
                     <div class="inputBx">
-                        <input type="submit" value="Log in" disabled>
+                        <input type="submit" value="Sign up" disabled>
                     </div>
                 </form>
-                <p>Don't have an account <a href="/login/signup">Sign up</a></p>
+                <p>Already a member? <a href="/login">Login</a></p>
             </div>
         </div>
     </div>
