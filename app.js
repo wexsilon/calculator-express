@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const serveFavicon = require('serve-favicon');
 const passport = require('passport');
+const httpErrors = require('http-errors');
 
 const indexRoutes = require('./routes/index');
 const loginRoutes = require('./routes/login');
@@ -50,7 +51,22 @@ async function main() {
     app.use('/', indexRoutes);
     app.use('/login', loginRoutes);
 
-    
+    app.use((req, res, next) => next(httpErrors(404)));
+    app.use((err, req, res, next) => {
+        res.status(err.status || 500);
+        res.render(
+            '404',
+            {
+                title: 'Error',
+                message: err.message,
+                error: {
+                    status: err.status,
+                    stack: err.stack
+                }
+            }
+        );
+    });
+    //console.log(httpErrors(404));
 
     app.listen(8000, () => console.log('Started Server On Port 8000'));
 }

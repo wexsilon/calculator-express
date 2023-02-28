@@ -1,0 +1,10 @@
+<%- include('includes/hstart', {title}) %>
+  <%- include('includes/hcss', { cssfiles: [
+  "https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css",
+  "/css/index.style.css"] }) %>
+<%- include('includes/hmid') %>
+<%- include('includes/hbackground') %>
+<main class="calculator-wrapper">
+  <%- include('includes/herror', { message, error }) %>
+</main>
+<%- include('includes/hend') %>
