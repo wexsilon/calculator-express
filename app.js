@@ -9,6 +9,7 @@ const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const serveFavicon = require('serve-favicon');
+const passport = require('passport');
 
 const indexRoutes = require('./routes/index');
 const loginRoutes = require('./routes/login');
@@ -29,13 +30,12 @@ async function main() {
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
     app.use(cookieParser());
-    
     app.use(
         expressSession(
             {
-                secret: 'keyboard cat',
+                secret: 'SqT3qKBxGV0N2rKo',
                 resave: false,
-                saveUninitialized: false,
+                saveUninitialized: true,
                 store: MongoStore.create(
                     {
                         mongoUrl: 'mongodb://0.0.0.0:27017/calculator_express'
@@ -44,9 +44,13 @@ async function main() {
             }
         )
     );
+    app.use(passport.initialize());
+    app.use(passport.session());
 
     app.use('/', indexRoutes);
     app.use('/login', loginRoutes);
+
+    
 
     app.listen(8000, () => console.log('Started Server On Port 8000'));
 }
