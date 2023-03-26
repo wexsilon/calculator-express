@@ -13,7 +13,7 @@ const passport = require('passport');
 const httpErrors = require('http-errors');
 
 const indexRoutes = require('./routes/index');
-const loginRoutes = require('./routes/login');
+const userRoutes = require('./routes/user');
 
 const app = express();
 
@@ -21,16 +21,21 @@ const app = express();
 async function main() {
     mongoose.set('strictQuery', false);
     await mongoose.connect('mongodb://0.0.0.0:27017/calculator_express');
-    
+
     app.set('view engine', 'ejs');
     app.set('views', path.join(__dirname, 'views'));
     
     app.use(morgan('dev'));
+    
     app.use(serveStatic(path.join(__dirname, 'public')));
+    
     app.use(serveFavicon(path.join(__dirname, 'public', 'img', 'calc.ico')));
+    
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
+    
     app.use(cookieParser());
+    
     app.use(
         expressSession(
             {
@@ -39,7 +44,7 @@ async function main() {
                 saveUninitialized: true,
                 store: MongoStore.create(
                     {
-                        mongoUrl: 'mongodb://0.0.0.0:27017/calculator_express'
+                        client: mongoose.connection.getClient()
                     }
                 )
             }
@@ -49,13 +54,13 @@ async function main() {
     app.use(passport.session());
 
     app.use('/', indexRoutes);
-    app.use('/login', loginRoutes);
+    app.use('/user', userRoutes);
 
     app.use((req, res, next) => next(httpErrors(404)));
     app.use((err, req, res, next) => {
         res.status(err.status || 500);
         res.render(
-            '404',
+            'error',
             {
                 title: 'Error',
                 message: err.message,
@@ -66,7 +71,6 @@ async function main() {
             }
         );
     });
-    //console.log(httpErrors(404));
 
     app.listen(8000, () => console.log('Started Server On Port 8000'));
 }

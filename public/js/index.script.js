@@ -1,3 +1,4 @@
+/*
 let $toggler = document.getElementById('toggler'),
     $calculator = document.querySelector('.calculator');
 
@@ -20,6 +21,7 @@ $toggler.addEventListener('click', function() {
     $toggler.querySelector('#dark').style.display = 'block';
   }
 })
+*/
 
 function onClickButton(e) {
   const xhr = new XMLHttpRequest();

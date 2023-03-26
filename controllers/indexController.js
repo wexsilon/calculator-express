@@ -1,10 +1,19 @@
 
 module.exports.getMethod = (req, res) => {
-    console.log(req.isAuthenticated());
-    res.render('index', {title: 'Calculator', calcopr: '&nbsp;', calcres: '&nbsp;'});
+    if (!req.isAuthenticated()) {
+        res.redirect('/user/login');
+    }
+    else {
+        res.render('index', {title: 'Calculator', calcopr: '&nbsp;', calcres: '&nbsp;'});
+    }
 };
 
 module.exports.postMethod = (req, res) => {
+    if (!req.isAuthenticated()) {
+        res.redirect('/user/login');
+        return;
+    }
+        
     const lsnums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
     const lsoprs = ['-', '+', '/', '*'];
     let {button, calcopr, calcres} = req.body;   
